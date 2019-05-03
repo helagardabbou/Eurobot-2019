@@ -12,55 +12,54 @@
 
 #define ID (4u) /*see on servo stickers*/
 
+// pins definition
 #define VALVE 7
-
 #define PUMP 4
-
 #define RAMP 9
 
+// values define for the valves
 int val;
 int initial_pos = 512;
 int in_pos = 205;
 int out_pos = 819;
 
+// values for ROS
 volatile int storage = 0;
 volatile int etape;
 
+// initialize
 SoftwareSerial mySerial(10, 11); // RX, TX
 Servo Ramp_servo;
-
 ros::NodeHandle nh;
-
 std_msgs::Bool arrival_msg;
-
 ros::Publisher pub("curry_arrived", &arrival_msg );
 
 // === Information ===
 /*
  * A4,A5: I2C for RGB captor
- * 
+ *
  * D4: Pump
  * D5,D6,D7: Valve
- * 
+ *
  * D10,D11: Serial for motor
- * 
+ *
  * pump 1/0: HIGH/LOW
  * valve 1/0: open/close
- * 
+ *
  * rotation motor 300° on 1024 bits
  * rotation of 90° = 1024/300*90 = 307
  */
- 
+
 // === Functions ===
 
 // pump-valve
 
 void pump_on(){
-  digitalWrite(PUMP, HIGH);
+  digitalWrite(PUMP, LOW);
 }
 
 void pump_off(){
-  digitalWrite(PUMP, LOW);
+  digitalWrite(PUMP, HIGH);
 }
 
 void valve_open(){
@@ -111,7 +110,7 @@ void ramp_open(){
 
 // all
 
-
+// deployement
 void show_bob(){
   arm_move(ID, in_pos);
   delay(1000);
@@ -119,11 +118,10 @@ void show_bob(){
   arrival_msg.data = true;
   pub.publish( &arrival_msg );
   delay(10);
-
 }
 
 void take_puck(){
- 
+  // take a puck and put it in the ramp (stock not full)
   if (storage < 2){
     pump_on();
     delay(1000);
@@ -142,9 +140,8 @@ void take_puck(){
     arrival_msg.data = true;
     pub.publish( &arrival_msg );
     delay(10);
-
-    
   }
+  // take a puck and keep it on the arm (stock full)
   else if (storage == 2){
     pump_on();
     delay(2000);
@@ -158,17 +155,17 @@ void take_puck(){
     storage=storage+1;
     arrival_msg.data = true;
     pub.publish( &arrival_msg );
-    delay(10);  
-
+    delay(10);
   }
+  // the stock is full and the arm is not empty
   else {
     arrival_msg.data = false;
     pub.publish( &arrival_msg );
     delay(10);
-    
   }
 }
 
+// open the ramp to empty the stock and put the puck in the ramp
 void flush_puck(){
     pump_on();
     delay(1000);
@@ -191,11 +188,11 @@ void flush_puck(){
 }
 
 // ROS
+
 void msgTake( const std_msgs::Empty& toggle_msg){
   if(etape==2||etape==3||etape==4){
     etape=etape+1;
     take_puck();
-    
   }
 }
 
@@ -203,7 +200,6 @@ void msgFlush( const std_msgs::Empty& toggle_msg){
   if(etape==5){
     etape=1;
     flush_puck();
-    
   }
 }
 
@@ -211,7 +207,6 @@ void msgStart( const std_msgs::Empty& toggle_msg){
   if(etape==1){
     etape=etape+1;
     show_bob();
-    
   }
 }
 
@@ -243,6 +238,7 @@ void setup() {
   delay(1000);
   arm_move(ID, initial_pos);
   delay(1000);
+
   // Ramp config
   Ramp_servo.attach(RAMP);
   pump_off();
