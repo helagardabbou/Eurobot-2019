@@ -18,9 +18,9 @@ step = 1
 GPIO.setwarnings(False) # Ignore warning
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 
-pins = [38, 37] # The used pin(s)
 # button0 - side - 38
 # button1 - start - 37
+pins = [38, 37] # The used pin(s)
 
 for pin in pins:
     GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pins to be an input pin and set initial value to be pulled low (off)
@@ -37,12 +37,15 @@ flush_pub = rospy.Publisher('flush_pucks', Empty, queue_size=10)
 
 
 # Definition of the functions
+
+# Toggle message send to the arduino (pump) to deploy the suction cup
 def show_bob():
     global bob_pub
     bob_pub.publish(Empty())
 
 
 
+# To read the button (GPIO) of the side
 def is_left():
     global left
     global step
@@ -52,10 +55,11 @@ def is_left():
         left = 0
     finally:
         if step == 1:
-            show_bob() #not sure of that
+            show_bob()
 
 
 
+# To read the button (GPIO) of the sart
 def is_started():
     global start
     if GPIO.input(pins[1]) == GPIO.LOW:
@@ -65,31 +69,35 @@ def is_started():
 
 
 
-
+# To send the coordinates to the arduino (navigation)
 def go_to(x, y):
     global nav_pub
     nav_pub.publish(Point(x, y, 0))
 
 
 
+# To send the angle of rotation to the arduino (navigation)
 def rotate(degrees):
     lobal rotate_pub
-    rotate_pub.publish(Point(degrees, 0, 0))
+    rotate_pub.publish(Point(degrees, 0, 0)) # send with Point structure (easier)
 
 
 
+# Toggle message send to the arduino (pump) to take a puck
 def take_puck():
     global take_pub
     take_pub.publish(Empty())
 
 
 
+# Toggle message send to the arduino (pump) to flush the pucks
 def flush_pucks():
     global flush_pub
     flush_pub.publish(Empty())
 
 
 
+# The "big" auomation function (callback)
 def step_ok_callback(data):
     if data.data == True:
         global step
@@ -170,7 +178,7 @@ def step_ok_callback(data):
         step += 1
 
     else:
-        rospy.loginfo("Waiting ...")
+        rospy.loginfo("Waiting ...") # security of test
 
 
 if __name__ == '__main__':
@@ -188,6 +196,6 @@ if __name__ == '__main__':
 
             else:
                 print('Not started')
-                
+
     except rospy.ROSInterruptException:
         pass
