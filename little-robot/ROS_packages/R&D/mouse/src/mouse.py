@@ -10,11 +10,9 @@ import rospy
 from geometry_msgs.msg import Point
 from std_msgs.msg import Bool
 
-# choose the setting depending the mouse to have real cm
-SETTING_MOUSE = 1 # std
+# choose the setting depending the mouse to have distance in cm
+#SETTING_MOUSE = 1 # std
 SETTING_MOUSE = 1/394.5 # ecam mouse
-#SETTING_MOUSE = 1/411.5 # maxime mouse
-#SETTING_MOUSE = 1/392 # julien mouse
 
 dist = [0,0,0]
 
@@ -33,12 +31,16 @@ def mouse_talker():
     rospy.init_node('mouse', anonymous=True)
     rate = rospy.Rate(1)
     while not rospy.is_shutdown():
+        # read bites in file /dev/input/mice
         with open("/dev/input/mice","rb") as fd:
             while True:
+                # unpack data to have x and y
                 y,x = struct.unpack("xbb",fd.read(3))
+                # correct the values with the mouse setting
                 x *= SETTING_MOUSE
                 y *= SETTING_MOUSE
                 global dist
+                # update the position of the mouse
                 dist[0] += x
                 dist[1] += y
                 pub.publish(Point(dist[0], dist[1], dist[2]))
