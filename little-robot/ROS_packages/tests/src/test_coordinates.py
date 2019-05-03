@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
 """
-    send the required coordinates of CURRY
+    send the required coordinates (1Hz) of CURRY
+    not the best version
 """
 
 import rospy
