@@ -18,7 +18,7 @@ pub4 = rospy.Publisher('button4', Bool, queue_size=10)
 pub5 = rospy.Publisher('button5', Bool, queue_size=10)
 
 # button0 - front left - 29
-# button1 - front right - 31
+# button1 - front right - 40
 # button2 - left - 32
 # button3 - right - 33
 # button4 - rear left - 35
@@ -29,6 +29,7 @@ for pin in pins:
 
 
 
+# Buttons talkers (do not use one only function for all the buttons)
 def button0_talker():
     global pub0
     if GPIO.input(pins[0]) == GPIO.HIGH:
