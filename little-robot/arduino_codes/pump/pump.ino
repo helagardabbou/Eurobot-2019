@@ -165,7 +165,7 @@ void take_puck(){
   }
 }
 
-// open the ramp to empty the stock and put the puck in the ramp
+// open the ramp to empty the stock and drop the puck of the arm
 void flush_puck(){
     pump_on();
     delay(1000);
@@ -184,7 +184,6 @@ void flush_puck(){
     arrival_msg.data = true;
     pub.publish( &arrival_msg );
     delay(10);
-
 }
 
 // ROS
@@ -238,7 +237,7 @@ void setup() {
   delay(1000);
   arm_move(ID, initial_pos);
   delay(1000);
-
+  
   // Ramp config
   Ramp_servo.attach(RAMP);
   pump_off();
