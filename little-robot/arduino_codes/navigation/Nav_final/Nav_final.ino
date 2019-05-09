@@ -8,6 +8,7 @@
 #include <geometry_msgs/Point.h>
 #include <std_msgs/Bool.h>
 #include <sensor_msgs/Range.h>
+// statement of functions // 
 void quad();
 void robot_stop();
 void isrt();
@@ -52,30 +53,25 @@ volatile float required_coords[3] = {0, 0, 0};
 #define PWM_BR 6
 #define IN1_BR 24
 #define IN2_BR 22 
+
+ // statement of the encoder // 
  
  Encoder motor_encoder_FL = Encoder(20, 42);
  Encoder motor_encoder_FR = Encoder(2, 40);
  Encoder motor_encoder_BL = Encoder(21, 38);
  Encoder motor_encoder_BR = Encoder(19, 36);
+ 
+ //configuration of the encoder//
+ 
  const int ENCODER_TICKS_PER_REV = 3200;
+ 
+ // configuration of the PID //
+ 
  const int CADENCE_MS = 10;
  volatile float dt = CADENCE_MS / 1000.;
-  // Angular velocity
- volatile float angular_speed_FL = 0;
- volatile float angular_speed_FR = 0;
- volatile float angular_speed_BL = 0;
- volatile float angular_speed_BR = 0;
-
- volatile float distance=0;
- volatile float distance_in=0;
- 
-
- 
- // PID 
  float gain_p = 80.0;
  float gain_i = 5.0;
  float gain_d = 0.0;  
- 
  double setpoint_FL, input_FL, output_FL;
  PID PID_FL(&input_FL, &output_FL, &setpoint_FL,gain_p,gain_i,gain_d, DIRECT);
  double setpoint_FR, input_FR, output_FR;
@@ -85,6 +81,17 @@ volatile float required_coords[3] = {0, 0, 0};
  double setpoint_BR, input_BR, output_BR;
  PID PID_BR(&input_BR, &output_BR, &setpoint_BR,gain_p,gain_i,gain_d, DIRECT);
  
+ // Angular velocity//
+ 
+ volatile float angular_speed_FL = 0;
+ volatile float angular_speed_FR = 0;
+ volatile float angular_speed_BL = 0;
+ volatile float angular_speed_BR = 0;
+
+
+ 
+
+ 
  // Variable to keep track of the old encoder value
  volatile long old_encoder_FL = 0;
  volatile long old_encoder_FR = 0;
@@ -93,7 +100,7 @@ volatile float required_coords[3] = {0, 0, 0};
  volatile bool ack;
 
 
- 
+ // requested speed //
  volatile float velocity_FL = 0;
  volatile float velocity_FR = 0;
  volatile float velocity_BL = 0;
@@ -103,13 +110,20 @@ volatile float required_coords[3] = {0, 0, 0};
  volatile float velocity_FR_old = 0;
  volatile float velocity_BL_old = 0;
  volatile float velocity_BR_old = 0;
-
+// radius of the wheel //
  float radius = 0.03;
+ // angle of rotation // 
  volatile float angle;
- volatile bool fdp=false;
- volatile bool tg = false;
- volatile bool connard =false;
+ // requested distance //
+ volatile float distance=0;
+ // Real-time distance //
+ volatile float distance_in=0;
+ 
+ volatile bool isrt_end = false;
+ volatile bool arrive = false;
+ volatile bool US_active =false;
  volatile bool mdr =false;
+
  ros::NodeHandle nh;
 
 
@@ -156,19 +170,19 @@ void stopUSRight( const sensor_msgs::Range& stop_us_r_msg){
 
 void stopUSRearLeft( const sensor_msgs::Range& stop_us_rl_msg){
   if (stop_us_rl_msg.range < 20.00) {
-      connard=true;
+      US_active =true;
   }
   else{
-      connard=false;
+      US_active =false;
   }
 }
 
 void stopUSRearRight( const sensor_msgs::Range& stop_us_rr_msg){
   if (stop_us_rr_msg.range < 20.00) {
-      connard=true;
+      US_active =true;
   }
   else{
-      connard=false;
+      US_active =false;
   }
 }
 
@@ -230,41 +244,41 @@ ros::Publisher pub("curry_arrived", &arrival_msg );
      PID_BL.SetOutputLimits(-255,255);
      distance_in=0;
      distance=0;
-     fdp=false;
-     tg=false;
-     connard=false;
+     isrt_end=false;
+     arrive=false;
+     US_active =false;
      mdr=false;
          
  }
 
  void loop() {
-      if(fdp){
-        if((distance_in > distance)&&!tg){
+      if(isrt_end){
+        if((distance_in > distance)&&!arrive){
               arrival_msg.data = true;
               pub.publish( &arrival_msg );
               robot_stop_dist();
-              tg=true;
+              arrive=true;
         }
         else{
-          if(connard && !mdr){
+          if(US_active && !mdr){
             robot_stop();
             mdr=true;
+          }
+        
+          else if(!US_active  && mdr){
+            mdr=false;
+            vitesse_abs=0.1;
+            velocity_BR=velocity_BR_old;
+            velocity_FR=velocity_FR_old;
+            velocity_BL=velocity_BL_old;
+            velocity_FL=velocity_FL_old;
+          }
+          else if (US_active  && mdr){
+            robot_stop();
+          }
         }
         
-        else if(!connard && mdr){
-          mdr=false;
-          vitesse_abs=0.1;
-          velocity_BR=velocity_BR_old;
-          velocity_FR=velocity_FR_old;
-          velocity_BL=velocity_BL_old;
-          velocity_FL=velocity_FL_old;
-        }
-        else if (connard && mdr){
-          robot_stop();
-        }
-        }
-        
-        fdp=false;
+        isrt_end = false;
         
       }
       run_robot();
@@ -310,7 +324,7 @@ void robot_stop(){
   
 }
 void calcul_vitesse(float x_coord,float y_coord){
-  tg=false;
+  arrive=false;
   vitesse_abs=0.1;
   distance_in=0;
   distance = sqrt(square(x_coord)+square(y_coord));
@@ -330,7 +344,7 @@ void calcul_vitesse(float x_coord,float y_coord){
 
 
 void rotation(float angle){
-  tg=false;
+  arrive=false;
   vitesse_abs=0.1*3.14*2;
   distance_in=0;
   if (angle > 0){
@@ -403,7 +417,7 @@ void isrt(){
     old_encoder_BR = motor_encoder_BR.read();
     angular_speed_BR = -( (2.0 * 3.141592 * (double)delta_encoder_BR) / ENCODER_TICKS_PER_REV ) / dt;  // rad/s
     
-    fdp=true;
+    isrt_end=true;
     
 
     
