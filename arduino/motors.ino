@@ -78,7 +78,6 @@ int PWM_M_Max_Left;
 int PWM_M_Max_Right;
 int ts;
 int tss;
-bool stopit = true;
 volatile float theta;
 
 // set PID constants
@@ -98,6 +97,7 @@ ros::NodeHandle nh;
 float dist_msg;
 float turn_msg;
 String arm_msg;
+bool stop_condition = false;
 std_msgs::Empty feedback_msg;
 geometry_msgs::Vector3 encoder_msg;
 
@@ -110,7 +110,6 @@ void dist_cb(const std_msgs::Float32& msg) {
     dist_msg = msg.data;
     Linear(dist_msg);
     pub_feedback.publish(&feedback_msg); // publish empty feedback message so we know this action has been completed
-
 }
 void turn_cb(const std_msgs::Float32& msg) {
     turn_msg = msg.data;
@@ -119,20 +118,24 @@ void turn_cb(const std_msgs::Float32& msg) {
 }
 void arm_cb(const std_msgs::String& msg) {
     arm_msg = msg.data;
-    if (strcmp(arm_msg, "left") == 0)
+    if (strcmp(arm_msg.c_str(), "left") == 0)
     {
         activate_left_arm();
         pub_feedback.publish(&feedback_msg);
     }
-    else if (strcmp(arm_msg, "right") == 0)
+    else if (strcmp(arm_msg.c_str(), "right") == 0)
     {
         activate_right_arm();
         pub_feedback.publish(&feedback_msg);
     }
 }
 void stop_cb(const std_msgs::String& msg) {
-
-    stopwheels();
+    if (strcmp(msg.data, "stop") == 0) {
+        stop_condition = true;
+        stopwheels();
+    }
+    else
+        stop_condition = false;
 }
 
 // define listeners
@@ -230,7 +233,7 @@ void Linear(double setpoint_lindis) {
 
     while (abs(error_lin) > 180) {
         nh.spinOnce();
-        if (strcmp() == 0){
+        if (stop_condition == false){
             error_lin = setpoint_lin - (double)((_LeftEncoderTicks + _RightEncoderTicks))/2.0;
             error_rot = setpoint_rot - (double)((_LeftEncoderTicks - _RightEncoderTicks))/2.0;
             feedback_lin = (double)((_LeftEncoderTicks + _RightEncoderTicks))/2.0;
