@@ -26,7 +26,7 @@ PORTL: 42 43 44 45 16 47 48 49
 #include <geometry_msgs/Vector3.h>
 
 // Macros for easier faster port writing
-// Not used in this code anymore, but useful to write to leds
+// Not used in this code anymore, but could be useful to write to leds faster (with some clever code)
 #define SET(x,y) (x|=(1<<y))    // usage: SET(PORTA,7) is the same as digitalWrite(29,HIGH)
 #define CLR(x,y) (x&=(~(1<<y))) // usage: CLR(PORTE,1) is the same as digitalWrite(1,LOW)
 
@@ -36,13 +36,21 @@ PORTL: 42 43 44 45 16 47 48 49
 #define c_RightEncoderPinA 19  // PORTD2
 #define c_RightEncoderPinB 18 // PORTD3
 
+// LEDs
 #define c_LeftLedPin 4 // PORTH6
 #define c_RightLedPin 5 // PORTH5
 
+// Servo
 #define c_LeftServoPin 22
 #define c_RightServoPin 24
 
-/* Créer un objet Servo pour contrôler le servomoteur */
+// Motors
+#define c_LeftMotorPwmPin 9
+#define c_LeftMotorDirPin 11
+#define c_RightMotorPwmPin 10
+#define c_RightMotorDirPin 7
+
+// initialize servos for the arms
 Servo servo_right;
 Servo servo_left;
 
@@ -61,16 +69,8 @@ volatile long _RightEncoderTicks = 0;
 volatile  byte c_LeftLedPinState = LOW;
 volatile  byte c_RightLedPinState = LOW;
 
-// Init motors
-const byte pwm_motorLeft = 9;
-const byte dir_motorLeft = 11;
-const byte pwm_motorRight = 10;
-const byte dir_motorRight = 7;
-
 // declare PWM variables
-int vitesse;
 int PWM_lin;
-
 int PWM_rot;
 int PWM_M_Left;
 int PWM_M_Right;
@@ -174,10 +174,10 @@ void setup() {
     pinMode(c_RightLedPin, OUTPUT);
     digitalWrite(c_RightLedPin, LOW);
 
-    pinMode(pwm_motorLeft, OUTPUT);
-    pinMode(dir_motorLeft, OUTPUT);
-    pinMode(pwm_motorRight, OUTPUT);
-    pinMode(dir_motorRight, OUTPUT);
+    pinMode(c_LeftMotorPwmPin, OUTPUT);
+    pinMode(c_LeftMotorDirPin, OUTPUT);
+    pinMode(c_RightMotorPwmPin, OUTPUT);
+    pinMode(c_RightMotorDirPin, OUTPUT);
 
     //Check PID
     if (diff_PID.err()) {
@@ -245,10 +245,10 @@ void Linear(double setpoint_lindis) {
             PWM_M_Left = PWM_lin + PWM_rot;
             PWM_M_Right =PWM_lin - PWM_rot;
 
-            if(PWM_M_Left > 0) digitalWrite(dir_motorLeft, HIGH);
-            else digitalWrite(dir_motorLeft, LOW);
-            if(PWM_M_Right > 0) digitalWrite(dir_motorRight, HIGH);
-            else digitalWrite(dir_motorRight, LOW);
+            if(PWM_M_Left > 0) digitalWrite(c_LeftMotorDirPin, HIGH);
+            else digitalWrite(c_LeftMotorDirPin, LOW);
+            if(PWM_M_Right > 0) digitalWrite(c_RightMotorDirPin, HIGH);
+            else digitalWrite(c_RightMotorDirPin, LOW);
 
             if (abs(PWM_M_Left)-abs(PWM_M_Right) > 10){
                 if(abs(PWM_M_Left)<abs(PWM_M_Right)){
@@ -269,8 +269,8 @@ void Linear(double setpoint_lindis) {
             if(abs(PWM_M_Left) > PWM_M_Max_Left) PWM_M_Left = PWM_M_Max_Left;
             if(abs(PWM_M_Right) > PWM_M_Max_Right) PWM_M_Right = PWM_M_Max_Right;
 
-            analogWrite(pwm_motorRight, abs(PWM_M_Right));
-            analogWrite(pwm_motorLeft, abs(PWM_M_Left));
+            analogWrite(c_RightMotorPwmPin, abs(PWM_M_Right));
+            analogWrite(c_LeftMotorPwmPin, abs(PWM_M_Left));
         } // if()
     } // while()
    stopwheels();
@@ -299,11 +299,11 @@ void Rotation(double angleConsigne) {
         PWM_M_Left = PWM_lin + PWM_rot;
         PWM_M_Right =PWM_lin - PWM_rot;
 
-        if(PWM_M_Left > 0) digitalWrite(dir_motorLeft, HIGH);
-        else digitalWrite(dir_motorLeft, LOW);
+        if(PWM_M_Left > 0) digitalWrite(c_LeftMotorDirPin, HIGH);
+        else digitalWrite(c_LeftMotorDirPin, LOW);
 
-        if(PWM_M_Right > 0) digitalWrite(dir_motorRight, HIGH);
-        else digitalWrite(dir_motorRight, LOW);
+        if(PWM_M_Right > 0) digitalWrite(c_RightMotorDirPin, HIGH);
+        else digitalWrite(c_RightMotorDirPin, LOW);
 
         if(abs(PWM_M_Left)-abs(PWM_M_Right) > 10){
             if(abs(PWM_M_Left)<abs(PWM_M_Right)){
@@ -323,14 +323,14 @@ void Rotation(double angleConsigne) {
         if(abs(PWM_M_Left) > PWM_M_Max_Left) PWM_M_Left = PWM_M_Max_Left;
         if(abs(PWM_M_Right) > PWM_M_Max_Right) PWM_M_Right = PWM_M_Max_Right;
 
-        analogWrite(pwm_motorRight, abs(PWM_M_Right));
-        analogWrite(pwm_motorLeft, abs(PWM_M_Left));
+        analogWrite(c_RightMotorPwmPin, abs(PWM_M_Right));
+        analogWrite(c_LeftMotorPwmPin, abs(PWM_M_Left));
     }
 }
 
 void stopwheels() {
-    analogWrite(pwm_motorLeft, 0);
-    analogWrite(pwm_motorRight, 0);
+    analogWrite(c_LeftMotorPwmPin, 0);
+    analogWrite(c_RightMotorPwmPin, 0);
 }
 
 void HandleLeftMotorInterrupt(){
