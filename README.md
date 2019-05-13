@@ -11,13 +11,14 @@ For a guide on how to contribute, [go here](./documentation/CONTRIBUTING.md)
 
 
 
-# Voltage measurement battery
+   # Voltage measurement battery
 
 # Introduction:
 The utility of this  work is  that  we need to know when the battery  is  charged to less than 17 V  , when it is less than 17 V  a buzzer will work as an alarm with blinking of one led he display of value of voltage on a LCD.  
 
  
 ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60328787_2086611784801674_4561795716971757568_n%20(1).png) 
+
 
 # STEPS:
 # Building an Arduino DC Voltmeter
@@ -26,6 +27,7 @@ In this tutorial you will see how
 to read voltages from the Arduino’s
  analog inputs and build a voltmeter 
 that measures direct current (DC) voltages.
+
 ![alt text]( https://github.com/helagardabbou/Eurobot-2019/raw/master/60292087_682390302175153_6846510643890094080_n%20(1).png)
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
@@ -41,18 +43,17 @@ In preparation, you should solder crocodile clips to two differently-colored wir
 
 
 # The Arduino Sketch
+
 To eliminate the possibility that the Arduino will run a previous sketch and operate in an unknown way, you can program the sketch first.
 To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60340879_556044004927076_1884299820311511040_n.png)
+ 
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img4.png)
-
  
-
- 
-# And then save the sketch:
+And then save the sketch:
 3.	On the File menu, click Save As…
 This sketch begins by initializing the serial port and declaring a few variables:
 vPow – When powered over a USB cable, it is common for the Arduino’s 5V power supply to be a little less than that ideal.
@@ -93,7 +94,9 @@ v2 = v / (r2 / (r1 + r2))
 With all the calculations completed, the value now represents the actual voltage measured by the circuit, and is sent to the display.
 Enhancing the Voltmeter
 The voltmeter presented here is extremely basic and we will see now  considerable room for enhancements such as  adding an LCD display, two leds and a  buzzer  that plays the role of an  alarm.
-Adding an LCD display 
+
+# Adding an LCD display 
+
 To make my voltmeter with my Arduino Uno, I used the LCD display.
 To complete the tutorial, you will need:
 •	1x LCD (Liquid Crystal Display)
@@ -127,7 +130,7 @@ For this part you will need to add:
 •	100 Ohm resistor
 The circuit :
 
-   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img8.png))
+   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img71.png))
 
 The connections are pretty easy, see the image above with breadboard circuit schematic.
 
@@ -137,6 +140,11 @@ How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9
 
 # The final Arduino Sketch
 
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img8.png)
+ 
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img9.png)
+  
+   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img10.png)
  
 Link to the code on Ecam Eurobot Github :
 https://github.com/helagardabbou/Eurobot-2019/blob/master/project.ino
@@ -162,8 +170,7 @@ To burn the bootloader, follow these steps:
 4.	Select "Arduino as ISP" from Tools > Programmer
 5.	Run Tools > Burn Bootloader
 You should only need to burn the bootloader once. After you've done so, you can remove the jumper wires connected to pins 10, 11, 12, and 13 of the Arduino board.
-   Be careful when you wire the cables between arduino and l’Atmega.	 
-Using an Arduino board to burn the bootloader onto an ATmega on a breadboard.
+ #  Be careful when you wire the cables between arduino and l’Atmega.	 
 
 
 # Uploading Using an Arduino Board
@@ -174,7 +181,8 @@ Once your ATmega328p has the Arduino bootloader on it, you can upload programs t
  
 Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
 Getting Rid of the Arduino Board
-Once you've programmed the ATmega on the breadboard, you can eliminate the Arduino. To do so, you'll need to provide an alternative power supply for the microcontroller. 
+Once you've programmed the ATmega on the breadboard, you can eliminate the Arduino. To do so, you'll need to provide an alternative power supply for the microcontroller.
+
 # Schematic with proteus 8 professional
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img13.png)
   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img14.png)
