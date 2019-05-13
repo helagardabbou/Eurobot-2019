@@ -21,7 +21,7 @@ The utility of this  work is  that  we need to know when the battery  is  charge
 
 
 # STEPS:
-#Building an Arduino DC Voltmeter
+# Building an Arduino DC Voltmeter
 
 In this tutorial you will see how 
 to read voltages from the Arduino’s
@@ -132,7 +132,7 @@ How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9
  
 Link to the code on Ecam Eurobot Github :
 
-#PCB 
+## PCB 
 
 # Building an Arduino on a Breadboard
 
@@ -154,7 +154,7 @@ You should only need to burn the bootloader once. After you've done so, you can 
 Using an Arduino board to burn the bootloader onto an ATmega on a breadboard.
 
 
-##Uploading Using an Arduino Board
+## Uploading Using an Arduino Board
 Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
  
 Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
