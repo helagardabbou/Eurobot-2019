@@ -26,6 +26,7 @@ In this tutorial you will see how
 to read voltages from the Arduino’s
  analog inputs and build a voltmeter 
 that measures direct current (DC) voltages.
+![alt text]( https://github.com/helagardabbou/Eurobot-2019/raw/master/60292087_682390302175153_6846510643890094080_n%20(1).png)
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
 To complete the tutorial, you will need:
@@ -45,9 +46,10 @@ To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60340879_556044004927076_1884299820311511040_n.png)
  
  
-![alt text]( https://github.com/helagardabbou/Eurobot-2019/raw/master/60292087_682390302175153_6846510643890094080_n%20(1).png)
+
  
 # And then save the sketch:
 3.	On the File menu, click Save As…
