@@ -13,7 +13,7 @@ For a guide on how to contribute, [go here](./documentation/CONTRIBUTING.md)
 
 
 
-## Voltage measurement battery
+# Voltage measurement battery
 #Introduction:
 The utility of this  work is  that  we need to know when the battery  is  charged to less than 17 V  , when it is less than 17 V  a buzzer will work as an alarm with blinking of one led he display of value of voltage on a LCD.  
 
@@ -40,7 +40,7 @@ In preparation, you should solder crocodile clips to two differently-colored wir
  Working with electricity, even at low voltages, can be dangerous. There a risk of damage to equipment and yourself – follow the connection diagrams and instructions carefully, and always seek advice from a qualified and experienced adult if you are unsure.
 
 
-## The Arduino Sketch
+# The Arduino Sketch
 To eliminate the possibility that the Arduino will run a previous sketch and operate in an unknown way, you can program the sketch first.
 To create the voltmeter sketch:
 1.	Open the Arduino IDE.
@@ -66,7 +66,7 @@ Stop Bits: 1
 Hardware Flow Control: None
 Software Flow Control: None
 
-## Building the Circuit
+# Building the Circuit
 
 Disconnect the Arduino from your computer before building this circuit!
 The circuit can be constructed on a breadboard:
@@ -109,7 +109,7 @@ The circuit can be constructed on a breadboard:
  
 
 
-# #Adding a buzzer
+ # Adding a buzzer
 
 I added a buzzer which work as alarm
 When the battery  is  charged to less than 17 V  
@@ -131,8 +131,9 @@ How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9
 
  
 Link to the code on Ecam Eurobot Github :
+https://github.com/helagardabbou/Eurobot-2019/blob/master/project.ino
 
-## PCB 
+# PCB 
 
 # Building an Arduino on a Breadboard
 
@@ -154,7 +155,7 @@ You should only need to burn the bootloader once. After you've done so, you can 
 Using an Arduino board to burn the bootloader onto an ATmega on a breadboard.
 
 
-## Uploading Using an Arduino Board
+# Uploading Using an Arduino Board
 Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
  
 Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
