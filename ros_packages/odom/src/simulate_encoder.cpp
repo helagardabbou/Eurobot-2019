@@ -1,7 +1,6 @@
 #include "ros/ros.h"
 #include <geometry_msgs/Vector3.h>
 
-
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "encoder_publisher");
