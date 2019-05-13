@@ -17,7 +17,7 @@ For a guide on how to contribute, [go here](./documentation/CONTRIBUTING.md)
 The utility of this  work is  that  we need to know when the battery  is  charged to less than 17 V  , when it is less than 17 V  a buzzer will work as an alarm with blinking of one led he display of value of voltage on a LCD.  
 
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60328787_2086611784801674_4561795716971757568_n%20(1).png) 
+![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img1.png)
 
 
 # STEPS:
@@ -28,7 +28,7 @@ to read voltages from the Arduino’s
  analog inputs and build a voltmeter 
 that measures direct current (DC) voltages.
 
-![alt text]( https://github.com/helagardabbou/Eurobot-2019/raw/master/60292087_682390302175153_6846510643890094080_n%20(1).png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img2.png)
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
 To complete the tutorial, you will need:
