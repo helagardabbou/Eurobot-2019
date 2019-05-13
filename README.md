@@ -49,7 +49,8 @@ To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60340879_556044004927076_1884299820311511040_n.png)
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img41.png)
+ 
  
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img4.png)
  
@@ -194,6 +195,6 @@ Once you've programmed the ATmega on the breadboard, you can eliminate the Ardui
 when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
 # References
 https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
+
 https://create.arduino.cc/projecthub/next-tech-lab/voltmeter-using-arduino-00e7d1
 
-Inline `project.ino` has `back-ticks around` it.
