@@ -13,15 +13,15 @@ For a guide on how to contribute, [go here](./documentation/CONTRIBUTING.md)
 
 
 
-Voltage measurement battery
-Introduction:
+## Voltage measurement battery
+#Introduction:
 The utility of this  work is  that  we need to know when the battery  is  charged to less than 17 V  , when it is less than 17 V  a buzzer will work as an alarm with blinking of one led he display of value of voltage on a LCD.  
 
  
 
 
-STEPS:
-Building an Arduino DC Voltmeter
+# STEPS:
+#Building an Arduino DC Voltmeter
 
 In this tutorial you will see how 
 to read voltages from the Arduino’s
@@ -38,14 +38,16 @@ To complete the tutorial, you will need:
 •	A breadboard (or suitable stripboard and soldering equipment).
 In preparation, you should solder crocodile clips to two differently-colored wires, as this will make it easier to attach them to components when measuring voltages.
  Working with electricity, even at low voltages, can be dangerous. There a risk of damage to equipment and yourself – follow the connection diagrams and instructions carefully, and always seek advice from a qualified and experienced adult if you are unsure.
-The Arduino Sketch
+
+
+## The Arduino Sketch
 To eliminate the possibility that the Arduino will run a previous sketch and operate in an unknown way, you can program the sketch first.
 To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
  
-And then save the sketch:
+# And then save the sketch:
 3.	On the File menu, click Save As…
 This sketch begins by initializing the serial port and declaring a few variables:
 vPow – When powered over a USB cable, it is common for the Arduino’s 5V power supply to be a little less than that ideal.
@@ -63,7 +65,9 @@ Data Bits: 8
 Stop Bits: 1
 Hardware Flow Control: None
 Software Flow Control: None
-Building the Circuit
+
+## Building the Circuit
+
 Disconnect the Arduino from your computer before building this circuit!
 The circuit can be constructed on a breadboard:
  
@@ -105,7 +109,7 @@ The circuit can be constructed on a breadboard:
  
 
 
-Adding a buzzer
+# #Adding a buzzer
 
 I added a buzzer which work as alarm
 When the battery  is  charged to less than 17 V  
@@ -119,19 +123,19 @@ The circuit :
 
 The connections are pretty easy, see the image above with breadboard circuit schematic.
 
-The code
+# The code
 
 How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9, delay(100) pause the program for one second and noTone(buzzer) stops the signal sound. The loop() routine will make this run again and again making a short beeping sound.
-The final Arduino Sketch
 
+# The final Arduino Sketch
 
-                   
- 
  
 Link to the code on Ecam Eurobot Github :
 
-PCB 
-Building an Arduino on a Breadboard
+#PCB 
+
+# Building an Arduino on a Breadboard
+
 This part  explains how to migrate from an Arduino board to a standalone microcontroller on a breadboard. It's similar to this tutorial, but uses an Arduino board to program the ATmega on the breadboard.
 Unless you choose to use the minimal configuration described at the end of this tutorial, you'll need four components (besides the Arduino, ATmega328PU, and breadboard):
 - a 16 MHz crystal,
@@ -150,7 +154,7 @@ You should only need to burn the bootloader once. After you've done so, you can 
 Using an Arduino board to burn the bootloader onto an ATmega on a breadboard.
 
 
-Uploading Using an Arduino Board
+##Uploading Using an Arduino Board
 Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
  
 Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
@@ -161,9 +165,9 @@ Schematic with proteus 8 professional
 
 The final printed circuit:
 
-Issue :
+# Issue :
 when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
-References
+# References
 https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
 https://create.arduino.cc/projecthub/next-tech-lab/voltmeter-using-arduino-00e7d1
 
