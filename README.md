@@ -49,10 +49,10 @@ To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img41.png)
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img3.png)
  
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img4.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img41.png)
  
 And then save the sketch:
 3.	On the File menu, click Save As…
