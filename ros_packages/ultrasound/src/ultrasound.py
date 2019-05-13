@@ -22,6 +22,8 @@ def stop_cb(msg):
     print(msg.data)
     if (msg.data == "stop"):
         go_condition[0] = False
+    elif (msg.data== "start"):
+        go_condition[0] = True
 
 def listener():
     rospy.init_node('ultrasound', anonymous=True)
