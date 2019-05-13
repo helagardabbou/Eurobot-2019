@@ -46,6 +46,9 @@ To create the voltmeter sketch:
 2.	Paste in the following code:
  
  
+ 
+![alt text]( https://github.com/helagardabbou/Eurobot-2019/raw/master/60292087_682390302175153_6846510643890094080_n%20(1).png)
+ 
 # And then save the sketch:
 3.	On the File menu, click Save As…
 This sketch begins by initializing the serial port and declaring a few variables:
