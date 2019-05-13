@@ -48,8 +48,7 @@ To create the voltmeter sketch:
  
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/60340879_556044004927076_1884299820311511040_n.png)
  
- 
-
+ ![alt text] (https://github.com/helagardabbou/Eurobot-2019/blob/master/img4.png)
  
 # And then save the sketch:
 3.	On the File menu, click Save As…
@@ -74,7 +73,8 @@ Software Flow Control: None
 
 Disconnect the Arduino from your computer before building this circuit!
 The circuit can be constructed on a breadboard:
- 
+
+  ![alt text] (https://github.com/helagardabbou/Eurobot-2019/blob/master/img5.png)
 
 The analog inputs of an Arduino can measure up to 5V (when using the built-in analog reference voltage). Even when only connecting to a 5V circuit, you should use the resistors to help protect the Arduino from short-circuits or unexpected voltage surges.
 Those two resistors form a potential divider that is used to lower the voltage being measured to a level that the Arduino can read. This actually extends the range that can be used. For example, if resistors are used to halve the input voltage then the Arduino can effectively read up to 10V (since 10V will be read as 5V, 5V will be read as 2.5V…). This comes at the expensive of accuracy – the ADCs in the Arduino can read up to 1024 different levels between 0V and 5V. By expanding the range to 10V, those 1024 levels are spread across a wider range and are therefore less able to detect small changes.
@@ -110,10 +110,12 @@ Connection of  the following pins:
 •	Additionally, wire a 10k pot to +5V and GND, with it's wiper (output) to LCD screens VO pin (pin3). A 220 ohm resistor is used to power the backlight of the display, usually on pin 15 and 16 of the LCD connector.
 The circuit can be constructed on a breadboard:
 
+  ![alt text] (https://github.com/helagardabbou/Eurobot-2019/blob/master/img6.png)
+
+
+ # Adding a buzzer          
  
-
-
- # Adding a buzzer
+  ![alt text] (https://github.com/helagardabbou/Eurobot-2019/blob/master/img7.png)
 
 I added a buzzer which work as alarm
 When the battery  is  charged to less than 17 V  
@@ -123,7 +125,7 @@ For this part you will need to add:
 •	100 Ohm resistor
 The circuit :
 
- 
+  ![alt text] (https://github.com/helagardabbou/Eurobot-2019/blob/master/img8.png)
 
 The connections are pretty easy, see the image above with breadboard circuit schematic.
 
