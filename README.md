@@ -248,8 +248,9 @@ void loop() {
     digitalWrite(ledOutput, LOW); 
        delay(100); 
      } 
-}   
-     ```
+}
+```
+    
 
  
 Link to the code on Ecam Eurobot Github :
