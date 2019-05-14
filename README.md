@@ -17,7 +17,7 @@ For a guide on how to contribute, [go here](./documentation/CONTRIBUTING.md)
 The utility of this  work is  that  we need to know when the battery  is  charged to less than 17 V  , when it is less than 17 V  a buzzer will work as an alarm with blinking of one led he display of value of voltage on a LCD.  
 
  
-![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img1.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img1.png)
 
 
 # STEPS:
@@ -28,7 +28,7 @@ to read voltages from the Arduino’s
  analog inputs and build a voltmeter 
 that measures direct current (DC) voltages.
 
-![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img2.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img2.png)
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
 To complete the tutorial, you will need:
@@ -49,10 +49,10 @@ To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
  
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img3.png)
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img3.png)
  
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img41.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img41.png)
  
  Link to the code on Ecam Eurobot Github :
  https://github.com/helagardabbou/Eurobot-2019/blob/master/potentiel.ino
@@ -81,7 +81,7 @@ Software Flow Control: None
 Disconnect the Arduino from your computer before building this circuit!
 The circuit can be constructed on a breadboard:
 
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img5.png)
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img5.png)
 
 The analog inputs of an Arduino can measure up to 5V (when using the built-in analog reference voltage). Even when only connecting to a 5V circuit, you should use the resistors to help protect the Arduino from short-circuits or unexpected voltage surges.
 Those two resistors form a potential divider that is used to lower the voltage being measured to a level that the Arduino can read. This actually extends the range that can be used. For example, if resistors are used to halve the input voltage then the Arduino can effectively read up to 10V (since 10V will be read as 5V, 5V will be read as 2.5V…). This comes at the expensive of accuracy – the ADCs in the Arduino can read up to 1024 different levels between 0V and 5V. By expanding the range to 10V, those 1024 levels are spread across a wider range and are therefore less able to detect small changes.
@@ -119,12 +119,12 @@ Connection of  the following pins:
 •	Additionally, wire a 10k pot to +5V and GND, with it's wiper (output) to LCD screens VO pin (pin3). A 220 ohm resistor is used to power the backlight of the display, usually on pin 15 and 16 of the LCD connector.
 The circuit can be constructed on a breadboard:
 
-   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img6.png)
+   ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img6.png)
 
 
  # Adding a buzzer          
  
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img7.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img7.png)
 
 I added a buzzer which work as alarm
 When the battery  is  charged to less than 17 V  
@@ -134,7 +134,7 @@ For this part you will need to add:
 •	100 Ohm resistor
 The circuit :
 
-   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img71.png))
+  ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img71.png)
 
 The connections are pretty easy, see the image above with breadboard circuit schematic.
 
@@ -144,11 +144,11 @@ How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9
 
 # The final Arduino Sketch
 
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img8.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img8.png)
  
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img9.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img9.png)
   
-   ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img10.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img10.png)
  
 Link to the code on Ecam Eurobot Github :
 https://github.com/helagardabbou/Eurobot-2019/blob/master/project.ino
@@ -164,7 +164,7 @@ Unless you choose to use the minimal configuration described at the end of this 
 -two 18 to 22 picofarad (ceramic) capacitors.
 # Burning the Bootloader
 
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img11.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img11.png)
  
 If you have a new ATmega328 (or ATmega168), you'll need to burn the bootloader onto it. You can do this using an Arduino board as an in-system program (ISP). If the microcontroller already has the bootloader on it (e.g. because you took it out of an Arduino board or ordered an already-bootloaded ATmega), you can skip this section.
 To burn the bootloader, follow these steps:
@@ -179,7 +179,7 @@ You should only need to burn the bootloader once. After you've done so, you can 
 
 # Uploading Using an Arduino Board
 
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img12.png)
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img12.png)
  
 Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
  
@@ -188,12 +188,11 @@ Getting Rid of the Arduino Board
 Once you've programmed the ATmega on the breadboard, you can eliminate the Arduino. To do so, you'll need to provide an alternative power supply for the microcontroller.
 
 # Schematic with proteus 8 professional
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img13.png)
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img14.png)
-
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img13.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img14.png)
 
 # The final printed circuit:
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/raw/master/img15.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img15.png)
 # Issue :
 when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
 # References
