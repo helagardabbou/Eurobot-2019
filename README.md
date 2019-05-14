@@ -32,12 +32,19 @@ that measures direct current (DC) voltages.
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
 To complete the tutorial, you will need:
+
 •	An Arduino or Arduino-compatible board with analog inputs.
+
 •	The Arduino IDE (integrated development environment).
+
 •	One 100Ko resistor.
+
 •	One 10Ko resistor.
+
 •	Four wires, in at least two different colors (red and black are recommended).
+
 •	A breadboard (or suitable stripboard and soldering equipment).
+
 In preparation, you should solder crocodile clips to two differently-colored wires, as this will make it easier to attach them to components when measuring voltages.
  Working with electricity, even at low voltages, can be dangerous. There a risk of damage to equipment and yourself – follow the connection diagrams and instructions carefully, and always seek advice from a qualified and experienced adult if you are unsure.
 
