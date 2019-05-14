@@ -183,62 +183,6 @@ How it works? It's simple, tone(buzzer, 1000) sends a 1KHz sound signal to pin 9
 
 # The final Arduino Sketch
 
-![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img8.png)
- 
-![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img9.png)
-  
-![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img10.png)
- 
-Link to the code on Ecam Eurobot Github :
-https://github.com/helagardabbou/Eurobot-2019/blob/master/project.ino
-
-# PCB 
-
-# Building an Arduino on a Breadboard
-
-This part  explains how to migrate from an Arduino board to a standalone microcontroller on a breadboard. It's similar to this tutorial, but uses an Arduino board to program the ATmega on the breadboard.
-Unless you choose to use the minimal configuration described at the end of this tutorial, you'll need four components (besides the Arduino, ATmega328PU, and breadboard):
-- a 16 MHz crystal,
--a 10k resistor, and
--two 18 to 22 picofarad (ceramic) capacitors.
-# Burning the Bootloader
-
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img11.png)
- 
-If you have a new ATmega328 (or ATmega168), you'll need to burn the bootloader onto it. You can do this using an Arduino board as an in-system program (ISP). If the microcontroller already has the bootloader on it (e.g. because you took it out of an Arduino board or ordered an already-bootloaded ATmega), you can skip this section.
-To burn the bootloader, follow these steps:
-1.	Upload the ArduinoISP sketch onto your Arduino board. (You'll need to select the board and serial port from the Tools menu that correspond to your board.)
-2.	Wire up the Arduino board and microcontroller as shown in the diagram to the right.
-3.	Select "Arduino Duemilanove or Nano w/ ATmega328" from the Tools > Board menu. (Or "ATmega328 on a breadboard (8 MHz internal clock)" if using the minimal configuration described below.)
-4.	Select "Arduino as ISP" from Tools > Programmer
-5.	Run Tools > Burn Bootloader
-You should only need to burn the bootloader once. After you've done so, you can remove the jumper wires connected to pins 10, 11, 12, and 13 of the Arduino board.
- #  Be careful when you wire the cables between arduino and l’Atmega.	 
-
-
-# Uploading Using an Arduino Board
-
-![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img12.png)
- 
-Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
- 
-Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
-Getting Rid of the Arduino Board
-Once you've programmed the ATmega on the breadboard, you can eliminate the Arduino. To do so, you'll need to provide an alternative power supply for the microcontroller.
-
-# Schematic with proteus 8 professional
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img13.png)
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img14.png)
-
-# The final printed circuit:
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img15.png)
-# Issues :
-when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
-# References
-https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
-
-https://create.arduino.cc/projecthub/next-tech-lab/voltmeter-using-arduino-00e7d1
-
 ```float vPow = 4.7; 
 float r1 = 100000; 
 float r2 = 10000;
@@ -306,3 +250,55 @@ void loop() {
      } 
 }   
      ```
+
+ 
+Link to the code on Ecam Eurobot Github :
+https://github.com/helagardabbou/Eurobot-2019/blob/master/project.ino
+
+# PCB 
+
+# Building an Arduino on a Breadboard
+
+This part  explains how to migrate from an Arduino board to a standalone microcontroller on a breadboard. It's similar to this tutorial, but uses an Arduino board to program the ATmega on the breadboard.
+Unless you choose to use the minimal configuration described at the end of this tutorial, you'll need four components (besides the Arduino, ATmega328PU, and breadboard):
+- a 16 MHz crystal,
+-a 10k resistor, and
+-two 18 to 22 picofarad (ceramic) capacitors.
+# Burning the Bootloader
+
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img11.png)
+ 
+If you have a new ATmega328 (or ATmega168), you'll need to burn the bootloader onto it. You can do this using an Arduino board as an in-system program (ISP). If the microcontroller already has the bootloader on it (e.g. because you took it out of an Arduino board or ordered an already-bootloaded ATmega), you can skip this section.
+To burn the bootloader, follow these steps:
+1.	Upload the ArduinoISP sketch onto your Arduino board. (You'll need to select the board and serial port from the Tools menu that correspond to your board.)
+2.	Wire up the Arduino board and microcontroller as shown in the diagram to the right.
+3.	Select "Arduino Duemilanove or Nano w/ ATmega328" from the Tools > Board menu. (Or "ATmega328 on a breadboard (8 MHz internal clock)" if using the minimal configuration described below.)
+4.	Select "Arduino as ISP" from Tools > Programmer
+5.	Run Tools > Burn Bootloader
+You should only need to burn the bootloader once. After you've done so, you can remove the jumper wires connected to pins 10, 11, 12, and 13 of the Arduino board.
+ #  Be careful when you wire the cables between arduino and l’Atmega.	 
+
+
+# Uploading Using an Arduino Board
+
+![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img12.png)
+ 
+Once your ATmega328p has the Arduino bootloader on it, you can upload programs to it using the USB-to-serial convertor (FTDI chip) on an Arduino board. To do, you remove the microcontroller from the Arduino board so the FTDI chip can talk to the microcontroller on the breadboard instead. The diagram at right shows how to connect the RX and TX lines from the Arduino board to the ATmega on the breadboard. To program the microcontroller, select "Arduino Duemilanove or Nano w/ ATmega328" from the the Tools > Board menu (or "ATmega328 on a breadboard (8 MHzinternal clock)" if you're using the minimal configuration described below). Then upload as usual.
+ 
+Uploading sketches to an ATmega on a breadboard. Remember to remove the microcontroller from the Arduino board!
+Getting Rid of the Arduino Board
+Once you've programmed the ATmega on the breadboard, you can eliminate the Arduino. To do so, you'll need to provide an alternative power supply for the microcontroller.
+
+# Schematic with proteus 8 professional
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img13.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img14.png)
+
+# The final printed circuit:
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img15.png)
+# Issues :
+when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
+# References
+https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
+
+https://create.arduino.cc/projecthub/next-tech-lab/voltmeter-using-arduino-00e7d1
+
