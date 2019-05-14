@@ -48,11 +48,50 @@ To eliminate the possibility that the Arduino will run a previous sketch and ope
 To create the voltmeter sketch:
 1.	Open the Arduino IDE.
 2.	Paste in the following code:
+```
+/*
+ * Building an Arduino DC Voltmeter
+*/
  
-  ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img3.png)
+ float vPow = 4.7;
+ float r1 = 100000;
+ float r2 = 10000;
  
+ void setup() {
+   Serial.begin(9600);
+   
+   // Send ANSI terminal codes
+   Serial.print("\x1B");
+   Serial.print("[2J");
+   Serial.print("\x1B");
+   Serial.println("[H");
+   // End ANSI terminal codes
+   
+   Serial.println("--------------------");
+   Serial.println("DC VOLTMETER");
+   Serial.print("Maximum Voltage: ");
+   Serial.print((int)(vPow / (r2 / (r1 + r2))));
+   Serial.println("V");
+   Serial.println("--------------------");
+   Serial.println("");
+   
+   delay(2000);
+ }
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img41.png)
+ void loop() {
+   float v = (analogRead(0) * vPow) / 1024.0;
+   float v2 = v / (r2 / (r1 + r2));
+   
+   // Send ANSI terminal codes
+   Serial.print("\x1B");
+   Serial.print("[1A");
+   // End ANSI terminal codes
+   
+   Serial.println(v2);
+}
+```
+ 
+
  
  Link to the code on Ecam Eurobot Github :
  https://github.com/helagardabbou/Eurobot-2019/blob/master/potentiel.ino
@@ -200,4 +239,70 @@ https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
 
 https://create.arduino.cc/projecthub/next-tech-lab/voltmeter-using-arduino-00e7d1
 
-```project.ino```
+```float vPow = 4.7; 
+float r1 = 100000; 
+float r2 = 10000;
+int ledOutput = 7;
+const int buzzer = 9; //buzzer to arduino pin 9
+
+#include <LiquidCrystal.h> 
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup() {
+   pinMode(buzzer, OUTPUT);
+ pinMode(ledOutput, OUTPUT);
+   lcd.begin(16, 2);
+
+   Serial.begin(9600);
+
+   Serial.println("--------------------"); 
+   Serial.println("DC VOLTMETER"); 
+   Serial.print("Maximum Voltage: "); 
+   Serial.print((int)(vPow / (r2 / (r1 + r2)))); 
+   Serial.println("V"); 
+   Serial.println("--------------------"); 
+   Serial.println("");
+
+   delay(2000); }
+                 
+void loop() { 
+    float v = (analogRead(A0) * vPow) / 1024.0; 
+    float v2 = v / (r2 / (r1 + r2));
+      digitalWrite(ledOutput, LOW);
+
+
+        if (v2 <= 17){
+                 lcd.clear();
+           Serial.println(" Voltage=");
+      Serial.println(v2);
+  Serial.println("V");
+    lcd.print("Voltage= ");
+      lcd.print(v2);
+        lcd.print(" V");
+         tone(buzzer, 1000); 
+         delay(1000);
+         noTone(buzzer); 
+         delay(100);
+    digitalWrite(ledOutput, HIGH); 
+     delay(100);
+
+        digitalWrite(ledOutput, LOW); 
+     delay(100);
+ 
+  }
+  else { 
+    lcd.clear();
+     Serial.println("Voltage=");
+      Serial.println(v2);
+  Serial.println("V");
+    lcd.print("Voltage= ");
+      lcd.print(v2);
+      lcd.print("V");
+  delay(500);
+
+    noTone(buzzer);     // Stop sound... 
+    digitalWrite(ledOutput, LOW); 
+       delay(100); 
+     } 
+}   
+     ```
