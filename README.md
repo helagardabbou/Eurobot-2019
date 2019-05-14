@@ -193,7 +193,7 @@ Once you've programmed the ATmega on the breadboard, you can eliminate the Ardui
 
 # The final printed circuit:
  ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img15.png)
-# Issue :
+# Issues :
 when the card was printed there are missed tracks that's why I did the circuit on the breadboard.
 # References
 https://www.jameco.com/jameco/workshop/jamecobuilds/arduinocircuit.html
