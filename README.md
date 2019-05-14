@@ -256,7 +256,7 @@ void loop() {
 ```
  # complete schematic on breadboard
  
- ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img17.png)
+ ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img16.png)
    
 
  
