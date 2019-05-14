@@ -31,18 +31,14 @@ that measures direct current (DC) voltages.
 ![alt text](https://github.com/helagardabbou/Eurobot-2019/blob/master/documentation/img/img2.png)
 
 The circuit and information presented below assume a basic knowledge of digital electronics and circuits, and how to use an Arduino. Learning the Arduino is a step-by-step process, covering both programming in C and working with electronics circuits.
+
 To complete the tutorial, you will need:
 
 •	An Arduino or Arduino-compatible board with analog inputs.
-
 •	The Arduino IDE (integrated development environment).
-
 •	One 100Ko resistor.
-
 •	One 10Ko resistor.
-
 •	Four wires, in at least two different colors (red and black are recommended).
-
 •	A breadboard (or suitable stripboard and soldering equipment).
 
 In preparation, you should solder crocodile clips to two differently-colored wires, as this will make it easier to attach them to components when measuring voltages.
@@ -133,14 +129,14 @@ The analog inputs of an Arduino can measure up to 5V (when using the built-in an
 Those two resistors form a potential divider that is used to lower the voltage being measured to a level that the Arduino can read. This actually extends the range that can be used. For example, if resistors are used to halve the input voltage then the Arduino can effectively read up to 10V (since 10V will be read as 5V, 5V will be read as 2.5V…). This comes at the expensive of accuracy – the ADCs in the Arduino can read up to 1024 different levels between 0V and 5V. By expanding the range to 10V, those 1024 levels are spread across a wider range and are therefore less able to detect small changes.
 You can increase the resistance value of R2, then the maximum voltage that can be read will be decreased; giving a slightly more accurate reading. With R1 at 100Ko and R2 at 10Ko, the input voltage is reduced by a factor of around 11 – allowing the voltmeter to read from 0V–55V.
 The formula for calculating values in a potential divider is:
-Vout = (R2 / (R1 + R2)) * Vin
+ ```Vout = (R2 / (R1 + R2)) * Vin```
 If the divider for the Arduino voltmeter is functioning correctly then Vout will be a maximum of 5V, and so you can calculate the maximum input voltage to the circuit:
-Vmax = 5.0 / (R2 / (R1 + R2))
+```Vmax = 5.0 / (R2 / (R1 + R2))```
 You can see a variation of this expression used in the setup() routine of the sketch.
 Note: If you use different resistors from the ones suggested here, you must be remember to adjust the values of r1 and r2 in the sketch.
 When measuring the voltage in the loop() routine, analogRead(0) is used to read the level from analog input 0. The returned value is an integer in the range 0 through 1023, so it must first be adjusted to a range 0 through 5. This is done by multiplying it by the power supply level, and then dividing by 1024.
 To transform the 0V–5V value into a reading that reflects the range of values that can be measured by the circuit, the resistors must be taken into account in the same way as was done to calculate the maximum voltage the circuit could measure:
-v2 = v / (r2 / (r1 + r2))
+```v2 = v / (r2 / (r1 + r2))```
 With all the calculations completed, the value now represents the actual voltage measured by the circuit, and is sent to the display.
 Enhancing the Voltmeter
 The voltmeter presented here is extremely basic and we will see now  considerable room for enhancements such as  adding an LCD display, two leds and a  buzzer  that plays the role of an  alarm.
@@ -153,6 +149,7 @@ To complete the tutorial, you will need:
 •	1x 10 k ohm potentiometer
 Connection of  the following pins:
 - LCD RS pin to digital pin 12
+
 -LCD Enable pin to digital pin 11
 -LCD D4 pin to digital pin 5
 -LCD D5 pin to digital pin 4
